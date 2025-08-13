@@ -1,0 +1,14 @@
+click this link 
+https://docs.btcpayserver.org/Deployment/
+
+and after search wallet. otherwise click this 
+
+https://docs.btcpayserver.org/HardwareWalletIntegration/
+
+and click 
+
+https://github.com/btcpayserver/BTCPayServer.Vault/releases
+
+and download this folder 
+
+As soon as we download and open it, the option to connect the hardware device (Ledger device) will appear. We need to turn on the hardware device, and it will connect just like Bluetooth.

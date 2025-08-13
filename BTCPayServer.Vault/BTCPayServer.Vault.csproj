@@ -1,0 +1,70 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="Version.csproj" Condition="Exists('Version.csproj')" />
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <OutputType Condition=" '$(Configuration)' == 'Release' ">WinExe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <LangVersion>12</LangVersion>
+    <Company>The BTCPayServer Team</Company>
+    <Title>BTCPayServer Vault</Title>
+    <AssemblyTitle>$(Title)</AssemblyTitle>
+    <TargetName>BTCPayServer.Vault</TargetName>
+    <Description>Allow web application to access your favorite Bitcoin hardware wallet</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia.Desktop" Version="11.0.6" />
+    <PackageReference Include="Avalonia.Themes.Simple" Version="11.0.6" />
+    <PackageReference Include="BTCPayServer.NTag424.PCSC" Version="1.0.18" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.0.6" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+    <PackageReference Include="NicolasDorier.RateLimits" Version="1.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BTCPayServer.Hwi\BTCPayServer.Hwi.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="**\*.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <AvaloniaResource Include="**\*.xaml;Assets\*" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Assets\" />
+  </ItemGroup>
+
+  <PropertyGroup Condition="'$(GithubDistrib)' == 'true'">
+    <PublishTrimmed>true</PublishTrimmed>
+    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+    <SelfContained>true</SelfContained>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(GithubDistrib)' == 'true'">
+    <TrimmerRootAssembly Include="BTCPayServer.Vault" />
+    <TrimmerRootAssembly Include="Avalonia.Themes.Simple" />
+    <TrimmerRootAssembly Include="Avalonia.Base" />
+    <TrimmerRootAssembly Include="Avalonia.FreeDesktop" />
+  </ItemGroup>
+</Project>
